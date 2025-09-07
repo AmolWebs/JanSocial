@@ -10,6 +10,7 @@ dotenv.config()
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+connectDB();
 
 const corsOptions = {
     origin: "*"
@@ -20,7 +21,6 @@ app.use(json());
 app.use('/api/user', userRouter);
 app.use('/api/post', postRouter);
 app.use('/api/comment', commentRouter);
-app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 // app.use((err, req, res, next) => {
 //   console.error(err.stack);
@@ -29,11 +29,9 @@ app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 app.get('/', (req, res)=>{
     res.send('<h1>Hello Backend</h1>');
-})
+});
 
-connectDB();
-// app.listen(PORT, () => {
-//     console.log(`App is running on port ${PORT}`)
-// })
+app.listen(PORT, () => {
+    console.log(`App is running on port ${PORT}`)
+});
 
-export default app;
