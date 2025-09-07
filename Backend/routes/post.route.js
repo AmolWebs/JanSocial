@@ -7,7 +7,7 @@ import User from '../models/user.model.js';
 import Comment from '../models/comment.model.js'
 
 const router = express.Router();
-const upload = multer({ dest: "uploads/", limits: { fileSize: 5 * 1024 * 1024 }, });
+const upload = multer({ dest: "/tmp", limits: { fileSize: 5 * 1024 * 1024 } });
 
 //Get all the posts uploaded by the users
 
@@ -59,7 +59,7 @@ router.post('/create', upload.single("dataFile"), async (req, res) => {
             postUrl = response.url;
 
         } else {
-            const fileBuffer = fs.readFileSync(dataFile.path)
+            const fileBuffer = dataFile.buffer;
             // Upload Image to Imagekit
             const response = await imagekit.upload({
                 file: fileBuffer,
