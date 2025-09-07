@@ -4,6 +4,7 @@ import cors from 'cors'
 import userRouter from './routes/user.route.js'
 import postRouter from './routes/post.route.js'
 import commentRouter from './routes/comment.route.js'
+import path from "path";
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -19,7 +20,7 @@ app.use(json());
 app.use('/api/user', userRouter);
 app.use('/api/post', postRouter);
 app.use('/api/comment', commentRouter);
-app.get('/favicon.ico', (req, res) => res.status(204));
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 // app.use((err, req, res, next) => {
 //   console.error(err.stack);
@@ -30,8 +31,9 @@ app.get('/', (req, res)=>{
     res.send('<h1>Hello Backend</h1>');
 })
 
-app.listen(PORT, () => {
-    connectDB();
-    console.log(`App is running on port ${PORT}`)
-})
+connectDB();
+// app.listen(PORT, () => {
+//     console.log(`App is running on port ${PORT}`)
+// })
 
+export default app;
