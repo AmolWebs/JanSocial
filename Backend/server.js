@@ -7,7 +7,7 @@ import commentRouter from './routes/comment.route.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 const corsOptions = {
@@ -15,15 +15,15 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+app.use(json());
 app.use('/api/user', userRouter);
 app.use('/api/post', postRouter);
 app.use('/api/comment', commentRouter);
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ success: false, message: 'Something went wrong' });
-});
+// app.use((err, req, res, next) => {
+//   console.error(err.stack);
+//   res.status(500).json({ success: false, message: 'Something went wrong' });
+// });
 
 app.get('/', (req, res)=>{
     res.send('<h1>Hello Backend</h1>');
