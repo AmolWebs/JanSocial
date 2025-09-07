@@ -19,6 +19,7 @@ app.use(json());
 app.use('/api/user', userRouter);
 app.use('/api/post', postRouter);
 app.use('/api/comment', commentRouter);
+app.get('/favicon.ico', (req, res) => res.status(204));
 
 // app.use((err, req, res, next) => {
 //   console.error(err.stack);
