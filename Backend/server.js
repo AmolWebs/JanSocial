@@ -28,7 +28,7 @@ app.use('/api/comment', commentRouter);
 // });
 
 app.get('/', (req, res)=>{
-    res.send('<h1>Hello Backend</h1>');
+    res.send('API Working');
 });
 
 app.listen(PORT, () => {
