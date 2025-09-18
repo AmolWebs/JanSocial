@@ -34,7 +34,7 @@ const Posts = () => {
                         {post.postType === "image" ?
                             <img src={post.postUrl} className='media-ele' alt="" />
                             :
-                            <video src={post.postUrl}></video>
+                            <video src={post.postUrl} controls width="600"></video>
                         }
                         <button>{post.Likes}</button>
                     </div>

@@ -6,8 +6,6 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 
-// const backendUrl = import.meta.env.BACKEND_URL;
-
 const Login = () => {
 
 
