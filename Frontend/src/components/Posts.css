@@ -1,3 +1,14 @@
-.media-ele{
-    height: 90vh;
+.posts-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile: 1 column */
+  gap: 20px;
+  padding: 1rem 2rem;
+  justify-items: center; /* center the cards */
+}
+
+/* Desktop view: 2 columns */
+@media (min-width: 768px) {
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

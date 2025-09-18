@@ -1,50 +1,65 @@
-import React from 'react'
-import axios from 'axios'
-import { useContext } from 'react';
-import { JanContext } from '../context/JanContext';
-import { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
+import { JanContext } from '../context/JanContext';
+import { toast } from 'react-toastify';
+import './Login.css';
 
 const Login = () => {
 
-
-
-  const { backendUrl, loginFunction, navigate, checkUser, location } = useContext(JanContext);
+  const { backendUrl, loginFunction, navigate, checkUser } = useContext(JanContext);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
   const loginSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post(`${backendUrl}/api/user/login`, {
-      username, password
-    });
+    const response = await axios.post(`${backendUrl}/api/user/login`, { username, password });
 
     if (response.data.success) {
       loginFunction(response.data.user.UID);
-      navigate("/");
-      console.log(localStorage.getItem('UID'))
+      navigate('/');
+      toast.success("Logged in successfully 🎉");
+    } else {
+      toast.error("Invalid Credentials ❌");
     }
-    else {
-      console.log("Invalid Credentials");
-    }
+  };
 
-  }
   useEffect(() => {
-    checkUser()
-  }, [])
+    checkUser();
+    
+  }, []);
 
   return (
-    <div>
-      <form onSubmit={(e) => loginSubmit(e)} >
-        <input type="text" name='username' onInput={(e) => setUsername(e.target.value)} placeholder='Enter Username' />
-        <input type="text" name='password' onInput={(e) => setPassword(e.target.value)} placeholder='Enter Password' />
-        <button type='submit' >Log In</button>
-        <NavLink to="/register" >Create new account</NavLink>
-
+    <div className="login-container">
+      <form className="login-form" onSubmit={loginSubmit}>
+        <h2>Login</h2>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          onInput={(e) => setUsername(e.target.value)}
+          placeholder="Enter Username"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onInput={(e) => setPassword(e.target.value)}
+          placeholder="Enter Password"
+          required
+        />
+        <button type="submit">Log In</button>
+        <p>
+          Don't have an account?{" "}
+          <NavLink to="/register" className="register-link">
+            Create Account
+          </NavLink>
+        </p>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

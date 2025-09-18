@@ -1,49 +1,31 @@
-import React from 'react'
-import axios from 'axios'
-import { useContext } from 'react'
-import { JanContext } from '../context/JanContext'
-import { useEffect, useState } from 'react'
-import './Posts.css';
-import { NavLink } from 'react-router-dom'
-
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { JanContext } from "../context/JanContext";
+import PostCard from "./PostCard";
+import "./Posts.css";  // ✅ new CSS for layout
 
 const Posts = () => {
+  const { backendUrl } = useContext(JanContext);
+  const [postsData, setPostsData] = useState([]);
 
-    const { backendUrl, user } = useContext(JanContext);
-    const [postsData, setPostsData] = useState([]);
+  const fetchAllPosts = async () => {
+    const response = await axios.get(`${backendUrl}/api/post/`);
+    const postsD = response.data.posts;
+    postsD.reverse();
+    setPostsData(postsD);
+  };
 
-    const fetchAllPosts = async () => {
-        const response = await axios.get(`${backendUrl}/api/post/`);
-        const postsD = response.data.posts;
-        postsD.reverse();
-        setPostsData(postsD)
-    }
+  useEffect(() => {
+    fetchAllPosts();
+  }, []);
 
-    useEffect(() => {
-        fetchAllPosts();
-    }, [])
+  return (
+    <div className="posts-grid">
+      {postsData.map((post) => (
+        <PostCard key={post.PID} post={post} />
+      ))}
+    </div>
+  );
+};
 
-    return (
-        <div>
-            {postsData.map((post) => (
-                <NavLink to={`/post/${post.PID}`}>
-
-                    <div key={post.PID}>
-                        <h2>{post.postTitle}</h2>
-                        <p>Uploaded By : {post.username}</p>
-                        {post.postType === "image" ?
-                            <img src={post.postUrl} className='media-ele' alt="" />
-                            :
-                            <video src={post.postUrl} controls width="600"></video>
-                        }
-                        <button>{post.Likes}</button>
-                    </div>
-                </NavLink>
-            ))}
-        </div>
-    )
-}
-
-
-
-export default Posts
+export default Posts;

@@ -11,6 +11,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Profile from './pages/Profile'
 import CreatePost from './pages/CreatePost'
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   return (
@@ -27,6 +28,18 @@ const App = () => {
         
       </Routes>
       <Footer />
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </JanProvider>
   )
 }

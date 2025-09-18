@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { JanContext } from '../context/JanContext';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import './Post.css'
 
 const Post = () => {
 
@@ -13,7 +15,7 @@ const Post = () => {
     const [comment, setComment] = useState('')
     const [refresh, setRefresh] = useState(false);
 
-    const { backendUrl,user } = useContext(JanContext);
+    const { backendUrl, user } = useContext(JanContext);
     const { id } = useParams();
 
     const fetchPostData = async () => {
@@ -30,11 +32,11 @@ const Post = () => {
 
     const submitComment = async (e) => {
         e.preventDefault();
-        const response = await axios.post(`${backendUrl}/api/comment/create`, {PID: post.PID, UID: user, comment: comment});
+        const response = await axios.post(`${backendUrl}/api/comment/create`, { PID: post.PID, UID: user, comment: comment });
         setComment("")
 
-        if(response.data.success){
-            alert("Comment Added Successfully")
+        if (response.data.success) {
+            toast.success("Comment Added Successfully")
             setRefresh(prev => !prev);
         }
         console.log(response)
@@ -48,31 +50,44 @@ const Post = () => {
 
 
     return (
-        <div>
-            <div>
+        <div className="post-container">
+            <div className="post-header">
                 <h2>{post.postTitle}</h2>
                 <p>Uploaded By : {post.username}</p>
-                {post.postType === "image" ?
-                    <img src={post.postUrl} className='media-ele' alt="" />
-                    :
-                    <video src={post.postUrl} controls width="600"></video>
-                }
-                <p>{post.postDescription}</p>
-                <button>{post.Likes}</button>
             </div>
-            <div>
-                {comments.map((comment)=>(
-                    <div key={comment.CID} >
+
+            <div className="post-media">
+                {post.postType === "image" ? (
+                    <img src={post.postUrl} className="media-ele" alt="" />
+                ) : (
+                    <video src={post.postUrl} controls />
+                )}
+            </div>
+
+            <button className="like-btn">{post.Likes}</button>
+            <h3>Description</h3>
+            <p className="post-description">{post.postDescription}</p>
+
+            <div className="comments-section">
+                <h3>Comments</h3>
+                {comments.map((comment) => (
+                    <div key={comment.CID} className="comment-card">
                         <p>{comment.comment}</p>
                     </div>
                 ))}
             </div>
 
-            <form onSubmit={(e)=>submitComment(e)}>
-                <input value={comment} onInput={(e)=>setComment(e.target.value)} type="Enter Your Comment" />
-                <button type='submit' >Comment</button>
+            <form onSubmit={submitComment} className="comment-form">
+                <input
+                    value={comment}
+                    onInput={(e) => setComment(e.target.value)}
+                    type="text"
+                    placeholder="Enter your comment"
+                />
+                <button type="submit">Comment</button>
             </form>
         </div>
+
     )
 }
 

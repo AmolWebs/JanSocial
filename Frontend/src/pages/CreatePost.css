@@ -1,0 +1,122 @@
+/* Main form container */
+.create-post-container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 1rem 2rem; /* container padding */
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Form element styling */
+.create-post-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Inputs and textarea */
+.create-post-container input[type="text"],
+.create-post-container textarea,
+.create-post-container select,
+.create-post-container input[type="file"] {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.create-post-container input[type="text"]:focus,
+.create-post-container textarea:focus,
+.create-post-container select:focus,
+.create-post-container input[type="file"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 4px rgba(37,99,235,0.3);
+}
+
+/* Textarea */
+.create-post-container textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* File type and file input wrapper */
+.file-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Label styling */
+.create-post-container label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Tags */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tags-container span {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #eee;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tags-container span:hover {
+  background-color: #ddd;
+}
+
+/* Submit Button */
+.create-post-container button {
+  padding: 0.7rem 1.2rem;
+  background-color: #2563eb;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.create-post-container button:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+}
+
+.create-post-container button:hover:enabled {
+  background-color: #1e40af;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .file-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tags-container {
+    gap: 0.4rem;
+  }
+
+  .create-post-container button {
+    width: 100%;
+  }
+}

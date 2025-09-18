@@ -2,6 +2,9 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { JanContext } from '../context/JanContext'
 import { NavLink } from 'react-router-dom'
+import PostCard from '../components/PostCard'
+import './Profile.css'
+import { toast } from 'react-toastify'
 
 const Profile = () => {
 
@@ -33,12 +36,14 @@ const Profile = () => {
     }
 
     const deleteComment = async (CID) => {
-        console.log(CID)
-        const response = await axios.delete(`${backendUrl}/api/comment/remove`, {data: {CID}})
-        if(response.data.success){
-
+        const response = await axios.delete(`${backendUrl}/api/comment/remove`, { data: { CID } })
+        if (response.data.success) {
+            toast.success("Comment deleted successfully")
             console.log(response.data.message)
 
+        }
+        else{
+            toast.error("Error while deleting comment")
         }
         console.log(response.data.message)
         fetchData()
@@ -53,38 +58,35 @@ const Profile = () => {
             <h2>Welcome {userInfo.username}</h2>
             <div>
                 <h3>My Posts</h3>
-                <div>
+                <div className="posts-grid" >
                     {posts.length !== 0 ? posts.map((post) => (
-                        <NavLink to={`/post/${post.PID}`}>
-                            <div key={post.PID}>
-                                <h2>{post.postTitle}</h2>
-                                <p>Uploaded By : {post.username}</p>
-                                {post.postType === "image" ?
-                                    <img src={post.postUrl} className='media-ele' alt="" />
-                                    :
-                                    <video src={post.postUrl}></video>
-                                }
-                                <button>{post.Likes}</button>
-                            </div>
+                        <NavLink className="post-link" to={`/post/${post.PID}`}>
+                            <PostCard key={post.PID} post={post} />
                         </NavLink>
-                    )) 
-                    :
-                    <p>You had'nt posted anything yet</p>
+                    ))
+                        :
+                        <p>You had'nt posted anything yet</p>
                     }
                 </div>
             </div>
-            <div>
+            <div className="my-comments-container">
                 <h3>My Comments</h3>
                 <div>
-                    {comments.length !== 0 ? comments.map((comment) => (
-                        <div key={comment.CID} >
-                            <p>{comment.comment}</p>
-                            <button onClick={() => deleteComment(comment.CID)} >Delete Comment</button>
-                        </div>
-                    ))
-                :
-                <p>You had'nt commented on any post</p>
-                }
+                    {comments.length !== 0 ? (
+                        comments.map((comment) => (
+                            <div key={comment.CID} className="comment-card">
+                                <p>{comment.comment}</p>
+                                <button
+                                    onClick={() => deleteComment(comment.CID)}
+                                    className="delete-btn"
+                                >
+                                    Delete Comment
+                                </button>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="empty-comments">You hadn't commented on any post</p>
+                    )}
                 </div>
             </div>
         </div>

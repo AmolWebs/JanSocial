@@ -1,0 +1,134 @@
+/* Container */
+.post-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 16px;
+  background: #ffffff; /* keep white as required */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Post Header */
+.post-header {
+  margin-bottom: 12px;
+}
+
+.post-header h2 {
+  font-size: 1.6rem;
+  margin: 0;
+  color: #222;
+}
+
+.post-header p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 4px 0 0;
+}
+
+/* Media Section */
+.post-media {
+  margin: 16px 0;
+  text-align: center;
+}
+
+.post-media img,
+.post-media video {
+  max-width: 100%;
+  border-radius: 10px;
+  height: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Post Description */
+.post-description {
+  font-size: 1rem;
+  color: #333;
+  margin: 12px 0;
+  line-height: 1.4;
+}
+
+/* Like Button */
+.like-btn {
+  padding: 6px 14px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-size: 0.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.like-btn:hover {
+  background: #1e40af;
+}
+
+/* Comments Section */
+.comments-section {
+  margin-top: 20px;
+}
+
+.comment-card {
+  padding: 10px 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+}
+
+.comment-card p {
+  margin: 0;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+/* Comment Form */
+.comment-form {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.comment-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.comment-form button {
+  padding: 10px 16px;
+  background: #10b981;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.comment-form button:hover {
+  background: #059669;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .post-container {
+    margin: 10px;
+    padding: 12px;
+  }
+
+  .post-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .comment-form {
+    flex-direction: column;
+  }
+
+  .comment-form button {
+    width: 100%;
+  }
+}

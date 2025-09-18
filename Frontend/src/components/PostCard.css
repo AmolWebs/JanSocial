@@ -1,0 +1,69 @@
+.post-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  width: 100%;
+  max-width: 500px;   /* keep cards consistent in desktop */
+  height: 400px;      /* fixed height for uniform grid */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* space out content */
+  overflow: hidden;   /* hide overflow text/media */
+  box-sizing: border-box;
+  transition: transform 0.2s ease-in-out;
+}
+
+.post-card:hover {
+  transform: scale(1.02);
+}
+
+.post-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.post-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6px;
+  white-space: nowrap;      /* prevent text wrapping */
+  overflow: hidden;         /* cut overflow */
+  text-overflow: ellipsis;  /* add ... if too long */
+}
+
+.post-user {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.post-media {
+  flex: 1;
+  width: 100%;
+  border-radius: 10px;
+  object-fit: contain;   /* make media fit without distortion */
+  height: 50%;
+}
+
+.post-actions {
+  margin-top: 10px;
+}
+
+.like-btn {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.like-btn:hover {
+  background: #e63950;
+}
