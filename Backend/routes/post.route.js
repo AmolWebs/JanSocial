@@ -7,8 +7,7 @@ import User from '../models/user.model.js';
 import Comment from '../models/comment.model.js'
 
 const router = express.Router();
-// const upload = multer({ dest: "/tmp", limits: { fileSize: 5 * 1024 * 1024 } });
-const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 5 * 1024 * 1024 } });
+const upload = multer({ dest: "/tmp", limits: { fileSize: 5 * 1024 * 1024 } });
 
 
 //Get all the posts uploaded by the users
@@ -41,63 +40,55 @@ router.get('/', async (req, res) => {
 // Create new post and add in user 
 
 router.post('/create', upload.single("dataFile"), async (req, res) => {
+  try {
+    const { UID, postTitle, postDescription, postType } = req.body;
+    const tags = JSON.parse(req.body.tags);
+    const dataFile = req.file;
+    let postUrl;
 
-    try {
-        console.log("Incoming body:", req.body);
-        console.log("Incoming file:", req.file);
-        const { UID, postTitle, postDescription, postType } = req.body;
-        const tags = JSON.parse(req.body.tags);
-        const dataFile = req.file;
-        let postUrl;
+    const fileBuffer = fs.readFileSync(dataFile.path); // ✅ works for both image/video
 
-        if (postType === "video") {
-            const fileBuffer = fs.readFileSync(dataFile.path);
-            const response = await imagekit.upload({
-                file: fileBuffer,
-                fileName: dataFile.originalname,
-                folder: "/videos",
-                useUniqueFileName: true
-            });
+    const folder = postType === "video" ? "/videos" : "/images";
+    const response = await imagekit.upload({
+      file: fileBuffer,
+      fileName: dataFile.originalname,
+      folder,
+      useUniqueFileName: true
+    });
 
-
-            postUrl = response.url;
-
-        } else {
-            const fileBuffer = dataFile.buffer;
-            const response = await imagekit.upload({
-                file: fileBuffer,
-                fileName: dataFile.originalname,
-                folder: "/images"
-            })
-
-            const optimizedImageUrl = imagekit.url({
-                path: response.filePath,
-                transformation: [
-                    { quality: 'auto' },
-                    { format: 'webp' },
-                    { width: '1280' }
-                ]
-            });
-            postUrl = optimizedImageUrl;
-        }
-
-        if (postUrl) {
-
-            console.log(postUrl)
-
-            const response = await Post.create({ UID: UID, postTitle: postTitle, postDescription: postDescription, tags: tags, postUrl: postUrl, postType: postType });
-            const addInUser = await User.findOneAndUpdate({ UID: UID }, { $push: { user_Posts: response.PID } }, { new: true })
-            if (!addInUser) {
-                return res.json({ success: false, message: "Invalid User" });
-            }
-            return res.json({ success: true, message: "Post successfully added", response, addInUser })
-
-        }
-
-    } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+    if (postType === "image") {
+      // optional optimization for images only
+      postUrl = imagekit.url({
+        path: response.filePath,
+        transformation: [
+          { quality: 'auto' },
+          { format: 'webp' },
+          { width: '1280' }
+        ]
+      });
+    } else {
+      postUrl = response.url;
     }
-})
+
+    const newPost = await Post.create({
+      UID,
+      postTitle,
+      postDescription,
+      tags,
+      postUrl,
+      postType
+    });
+
+    await User.findOneAndUpdate({ UID }, { $push: { user_Posts: newPost.PID } });
+    res.json({ success: true, message: "Post successfully added", newPost });
+    
+    // cleanup temp file
+    fs.unlinkSync(dataFile.path);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 
 router.get('/:id', async (req, res) => {
     try {

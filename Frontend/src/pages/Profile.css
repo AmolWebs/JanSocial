@@ -11,6 +11,13 @@
     width: 100%;
 }
 
+.welcome-msg-profile{
+  margin-left: 30px;
+}
+
+.user-posts-profile{
+  margin-left: 30px;
+}
 
 /* Comment Card */
 .my-comments-container {

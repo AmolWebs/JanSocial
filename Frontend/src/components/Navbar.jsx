@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { JanContext } from '../context/JanContext';
 import { Menu, X, PlusCircle, User, Home } from 'lucide-react'; // icons
 import './Navbar.css';
+import { assets } from '../assets/assets';
 
 const Navbar = () => {
   const { user, logoutFunction, validateUser } = useContext(JanContext);
@@ -16,8 +17,8 @@ const Navbar = () => {
     <nav className="navbar">
       {/* Logo */}
       <div className="navbar-logo">
-        <NavLink to="/">
-        <h1>JanSocial</h1>
+        <NavLink className="logo-parent" to="/">
+          <img src={assets.logo} className='web-logo' alt="" />
         </NavLink>
       </div>
 
@@ -29,7 +30,7 @@ const Navbar = () => {
       {/* Links */}
       <div className={`navbar-links ${menuOpen ? 'active' : ''}`}>
         <NavLink to="/" className="nav-link" onClick={() => setMenuOpen(false)}>
-        <Home size={18} /> Home
+          <Home size={18} /> Home
         </NavLink>
         <NavLink to="/createPost" className="nav-link" onClick={() => setMenuOpen(false)}>
           <PlusCircle size={18} /> Create Post

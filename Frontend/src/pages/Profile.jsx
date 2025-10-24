@@ -59,9 +59,9 @@ const Profile = () => {
 
     return (
         <div>
-            <h2>Welcome {userInfo.username}</h2>
-            <div>
-                <h3>My Posts</h3>
+            <h2 className='welcome-msg-profile' >Welcome {userInfo.username} 👋 </h2>
+            <div >
+                <h3 className='user-posts-profile' >My Posts</h3>
                 <div className="posts-grid" >
                     {posts.length !== 0 ? posts.map((post) => (
                         <div className="post-link">

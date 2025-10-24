@@ -67,7 +67,7 @@ const CreatePost = () => {
     };
 
     const submitPost = async (e) => {
-        // setBtnToggle(!btnToggle)
+        setBtnToggle(!btnToggle)
         e.preventDefault();
         if (!file) {
             toast.error("Please upload a valid file")

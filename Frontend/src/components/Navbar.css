@@ -1,7 +1,7 @@
 /* Navbar Container */
 .navbar {
   width: 100%;
-  background: linear-gradient(135deg, #a1c4fd, #fbc2eb);
+  background-color: white;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -11,6 +11,7 @@
   top: 0;
   z-index: 1000;
   box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 /* Logo */
@@ -60,6 +61,33 @@
 .logout-btn:hover {
   background: #c2185b;
 }
+
+
+.navbar{
+  width: 100%;
+}
+
+.navbar-logo{
+  width: 15%;
+}
+
+.logo-parent{
+  width: 100%;
+}
+
+.web-logo{
+  height: 100%;
+  width: inherit;
+  border-radius: 20px;
+}
+
+@media (max-width: 768px){
+  .navbar-logo{
+  width:30%;
+}
+}
+
+
 
 /* Hamburger (hidden on desktop) */
 .menu-icon {

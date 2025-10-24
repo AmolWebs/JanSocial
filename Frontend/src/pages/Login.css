@@ -1,12 +1,18 @@
 /* Container setup */
 .login-container {
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #a1c4fd, #fbc2eb); /* light blue → pink */
+  /* background: linear-gradient(135deg, #a1c4fd, #fbc2eb);  */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 1rem;
+}
+
+@media (max-width: 768px){
+  .login-container{
+    min-height: 90vh;
+  }
 }
 
 /* Form card */
