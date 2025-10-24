@@ -20,17 +20,17 @@ router.post('/register', async (req, res) => {
 
     try {
         const { username, password } = req.body;
-        const dbUser = await User.findOne({username: username});
-        if(dbUser){
-            return res.status(500).json({success: false, message: "Username already exists"});
+        const dbUser = await User.findOne({ username: username });
+        if (dbUser) {
+            return res.status(500).json({ success: false, message: "Username already exists" });
         }
-        else{
-            const user = await User.create({username, password});
+        else {
+            const user = await User.create({ username, password });
             return res.json({ success: true, message: "Registration Successful", user });
         }
 
     } catch (error) {
-        return res.status(400).json({success: false, message: "Error while Registration",error: error})
+        return res.status(400).json({ success: false, message: "Error while Registration", error: error })
     }
 
 })
@@ -52,24 +52,29 @@ router.post('/login', async (req, res) => {
         }
     } catch (error) {
         console.log("Backend : Error while Login : ", error)
-        return res.json({ success: false, message: "Error while login"   })
+        return res.json({ success: false, message: "Error while login" })
     }
 });
 
 // this route is for profile page to get user posts and comments
 
-router.post('/profileData', async(req, res) => {
+router.post('/profileData', async (req, res) => {
     const { UID } = req.body;
-    const user = await User.findOne({UID: UID});
-    if(!user){
-        return res.status(500).json({success: false, message:"Invalid user ID"});
+    const user = await User.findOne({ UID: UID });
+    if (!user) {
+        return res.status(500).json({ success: false, message: "Invalid user ID" });
     }
 
     const posts = await Post.find({ PID: { $in: user.user_Posts } });;
-    const comments = await Comment.find({ CID : {$in: user.user_Comments}});
+    const comments = await Comment.find({ CID: { $in: user.user_Comments } });
+
+    const postsWithUsername = posts.map(post => ({
+        ...post.toObject(), // preserves all fields safely
+        username: user.username
+    }));
 
 
-    res.json({success: true, user, posts, comments});
+    res.json({ success: true, user, posts: postsWithUsername, comments });
 })
 
 export default router;

@@ -14,6 +14,7 @@ const Post = () => {
     const [comments, setComments] = useState([])
     const [comment, setComment] = useState('')
     const [refresh, setRefresh] = useState(false);
+    const [like, setLike] = useState(null)
 
     const { backendUrl, user } = useContext(JanContext);
     const { id } = useParams();
@@ -25,9 +26,7 @@ const Post = () => {
             setComments(commentData);
         }
         setPost(response.data.post)
-        console.log(response);
-        console.log(post)
-        console.log(comments)
+        setLike(response.data.post.likes)
     }
 
     const submitComment = async (e) => {
@@ -41,6 +40,16 @@ const Post = () => {
         }
         console.log(response)
     }
+
+    const handleLike = async () => {
+        const response = await axios.post(`${backendUrl}/api/post/like/${id}`, {UID: user})
+        console.log(response.data)
+        setLike(response.data.post.likes)
+    }
+
+
+
+
 
 
     useEffect(() => {
@@ -56,7 +65,7 @@ const Post = () => {
                 <p>Uploaded By : {post.username}</p>
             </div>
 
-            <div className="post-media">
+            <div className="post-media-post">
                 {post.postType === "image" ? (
                     <img src={post.postUrl} className="media-ele" alt="" />
                 ) : (
@@ -64,7 +73,7 @@ const Post = () => {
                 )}
             </div>
 
-            <button className="like-btn">{post.Likes}</button>
+            <button onClick={()=>handleLike()} value={like} className="like-btn">{like}</button>
             <h3>Description</h3>
             <p className="post-description">{post.postDescription}</p>
 

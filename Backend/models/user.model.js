@@ -16,7 +16,9 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     user_Posts: [{ type: mongoose.Schema.Types.ObjectId ,ref: "Post", default: [] }],
-    user_Comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment", default: [] }]
+    user_Comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment", default: [] }],
+    liked_Posts : [{ type: mongoose.Schema.Types.ObjectId ,ref: "Post", default: [] }]
+
 });
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);

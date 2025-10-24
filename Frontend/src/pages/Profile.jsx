@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import PostCard from '../components/PostCard'
 import './Profile.css'
 import { toast } from 'react-toastify'
+import { Divide } from 'lucide-react'
 
 const Profile = () => {
 
@@ -16,17 +17,20 @@ const Profile = () => {
     const fetchData = async () => {
         try {
             const fetchUser = await axios.post(`${backendUrl}/api/user/profileData`, { UID: user });
+            console.log("FetchUser is : ", fetchUser)
             if (fetchUser) {
                 console.log(fetchUser.data.user)
                 console.log(fetchUser.data.comments)
                 console.log(fetchUser.data.posts)
                 setUserInfo(fetchUser.data.user)
+                console.log("user information is : ",userInfo)
                 if (fetchUser.data.comments.length > 0) {
                     setComments(fetchUser.data.comments);
                 }
-                if (fetchUser.data.posts.length > 0) {
+               if (fetchUser.data.posts.length > 0) {
                     setPosts(fetchUser.data.posts);
-                }
+
+               }
             }
         } catch (error) {
             // alert(error.message)
@@ -60,9 +64,9 @@ const Profile = () => {
                 <h3>My Posts</h3>
                 <div className="posts-grid" >
                     {posts.length !== 0 ? posts.map((post) => (
-                        <NavLink className="post-link" to={`/post/${post.PID}`}>
+                        <div className="post-link">
                             <PostCard key={post.PID} post={post} />
-                        </NavLink>
+                        </div>
                     ))
                         :
                         <p>You had'nt posted anything yet</p>

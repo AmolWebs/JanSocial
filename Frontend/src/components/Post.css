@@ -27,16 +27,16 @@
 }
 
 /* Media Section */
-.post-media {
+.post-media-post {
   margin: 16px 0;
   text-align: center;
 }
 
-.post-media img,
-.post-media video {
+.post-media-post img,
+.post-media-post video {
   max-width: 100%;
   border-radius: 10px;
-  height: auto;
+  max-height: 100vh;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 

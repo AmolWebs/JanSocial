@@ -1,69 +1,102 @@
-.post-card {
+.post-card-postcard {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 15px;
   width: 100%;
-  max-width: 500px;   /* keep cards consistent in desktop */
-  height: 400px;      /* fixed height for uniform grid */
+  max-width: 500px;  
+  height: 450px;    
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* space out content */
-  overflow: hidden;   /* hide overflow text/media */
+  justify-content: space-between; 
+  overflow: hidden; 
   box-sizing: border-box;
   transition: transform 0.2s ease-in-out;
 }
 
-.post-card:hover {
+.post-card-postcard:hover {
   transform: scale(1.02);
 }
 
-.post-link {
+.post-link-postcard {
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 90%;
+  /* background-color: red; */
 }
 
-.post-title {
+.post-title-postcard {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
   margin-bottom: 6px;
-  white-space: nowrap;      /* prevent text wrapping */
-  overflow: hidden;         /* cut overflow */
-  text-overflow: ellipsis;  /* add ... if too long */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.post-user {
+.post-user-postcard {
   font-size: 0.9rem;
   color: #777;
   margin-bottom: 10px;
 }
 
-.post-media {
-  flex: 1;
+.post-media-postcard {
   width: 100%;
   border-radius: 10px;
-  object-fit: contain;   /* make media fit without distortion */
-  height: 50%;
+  object-fit: contain;
+  height: 40vh;
+  margin-bottom: 10px;
 }
 
-.post-actions {
-  margin-top: 10px;
+.post-likes-postcard {
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: green; */
 }
 
-.like-btn {
-  background: #ff4d6d;
-  color: white;
+.read-btn-postcard {
+  padding: 7px 20px;
+  border-radius: 3px;
   border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
+  outline: none;
   cursor: pointer;
-  font-size: 0.9rem;
+  text-decoration: none;
+  /* background-color: gray; */
 }
 
-.like-btn:hover {
-  background: #e63950;
+.like-btn-new-postcard {
+  padding: 7px 20px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.post-delete-btn-postcard {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  background-color: red;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.dis-delete-btn-postcard {
+  display: none;
+}
+
+
+.remvoe-nav{
+  text-decoration: none;
+  
 }

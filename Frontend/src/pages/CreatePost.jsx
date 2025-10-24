@@ -67,7 +67,7 @@ const CreatePost = () => {
     };
 
     const submitPost = async (e) => {
-        setBtnToggle(!btnToggle)
+        // setBtnToggle(!btnToggle)
         e.preventDefault();
         if (!file) {
             toast.error("Please upload a valid file")
@@ -79,14 +79,16 @@ const CreatePost = () => {
         formData.append("postTitle", postTitle);
         formData.append("postDescription", postDescription);
         formData.append("postType", postType);
-        formData.append("tags", JSON.stringify(tags)); // if tags is array
-        formData.append("dataFile", file); // must match upload.single("dataFile")
+        formData.append("tags", JSON.stringify(tags)); 
+        formData.append("dataFile", file);
 
         const response = await axios.post(`${backendUrl}/api/post/create`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         });
+
+        console.log("Response is : ", response, response.data.success)
 
         // const response = axios.post(`${backendUrl}/api/post/create`, { UID: user, postTitle: postTitle, postDescription: postDescription, file: file, postType: postType })
         if (response.data.success) {
@@ -104,7 +106,6 @@ const CreatePost = () => {
         setFile(null)
         setPostType("image")
         setTagInput("")
-        setBtnToggle(!btnToggle);
     }
 
     return (
