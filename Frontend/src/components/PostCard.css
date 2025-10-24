@@ -1,23 +1,15 @@
 .post-card-postcard {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 15px;
   width: 100%;
-  max-width: 500px;  
-  height: auto;    
-  box-sizing: border-box;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
-  overflow: hidden; 
-  box-sizing: border-box;
+  gap: 12px;
   transition: transform 0.2s ease-in-out;
-  gap: 0;
-}
-
-.post-link-postcard{
-  height: 70%;
+  overflow: hidden;
 }
 
 .post-card-postcard:hover {
@@ -29,115 +21,123 @@
   color: inherit;
   display: flex;
   flex-direction: column;
-  height: 90%;
-  /* background-color: red; */
+  gap: 8px;
+}
+
+.parent-post-media-postcard {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-media-postcard {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 10px;
 }
 
 .post-title-postcard {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
-  /* margin-bottom: 6px; */
+  margin-top: 6px;
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .post-user-postcard {
   font-size: 0.9rem;
-  color: #777;
-  /* margin-bottom: 10px; */
-}
-
-.parent-post-media-postcard{
-  height: 75%;
-  text-align: center;
-}
-
-.post-media-postcard {
-  border-radius: 10px;
-  object-fit: contain;
-  height: 80%;
-  width: 100%;
-  /* margin-bottom: 10px; */
-}
-
-@media (max-width: 768px){
-  .post-media-postcard{
-    height: 80%;
-  }
+  color: #666;
+  margin-bottom: 5px;
 }
 
 .post-likes-postcard {
-  height: 25%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid rgb(227, 227, 227);
-  padding: 20px;
-  border-radius: 10px;
-  /* background-color: green; */
+  border-top: 1px solid #e3e3e3;
+  padding-top: 12px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.read-btn-postcard {
-  padding: 7px 20px;
-  border-radius: 3px;
-  border: none;
-  outline: none;
-  cursor: pointer;
+.remove-nav {
   text-decoration: none;
-  /* background-color: gray; */
-}
-
-.like-btn-new-postcard {
-  padding: 7px 20px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.post-delete-btn-postcard {
-  padding: 10px 20px;
-  border: none;
-  outline: none;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: red;
-  text-decoration: none;
-  text-align: center;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
+  gap: 5px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
 
+.like-btn-new-postcard {
+  background-color: #22c55e;
+}
+
+.like-btn-new-postcard:hover {
+  background-color: #16a34a;
+}
+
+.read-btn-postcard {
+  background-color: #3b82f6;
+}
+
+.read-btn-postcard:hover {
+  background-color: #2563eb;
+}
+
+.post-delete-btn-postcard {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.post-delete-btn-postcard:hover {
+  background-color: #dc2626;
 }
 
 .dis-delete-btn-postcard {
   display: none;
 }
 
-
-.remove-nav{
-  text-decoration: none;
-  color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  padding: 10px;
-  background-color: #22c55e;
-  border-radius: 10px;
-  
-}
-
-@media (max-width: 768px){
-  .remove-nav{
-    font-size: 11px;
-    padding:10px;
+@media (max-width: 768px) {
+  .post-card-postcard {
+    padding: 12px;
+    max-width: 100%;
   }
 
-  .post-likes-postcard{
-    padding: 5px;
+  .post-media-postcard {
+    max-height: 220px;
+  }
+
+  .post-likes-postcard {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .remove-nav {
+    font-size: 13px;
+    padding: 8px 12px;
   }
 }

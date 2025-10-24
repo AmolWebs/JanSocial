@@ -6,6 +6,7 @@ import { JanContext } from '../context/JanContext';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { BiSolidUpvote } from "react-icons/bi";
 import './Post.css'
 
 const Post = () => {
@@ -73,7 +74,7 @@ const Post = () => {
                 )}
             </div>
 
-            <button onClick={()=>handleLike()} value={like} className="like-btn">{like}</button>
+            <button onClick={()=>handleLike()} value={like} className="like-btn"><BiSolidUpvote /> {like}</button>
             <h3>Description</h3>
             <p className="post-description">{post.postDescription}</p>
 
