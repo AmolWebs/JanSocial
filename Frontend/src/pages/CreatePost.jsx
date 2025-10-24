@@ -167,7 +167,7 @@ const CreatePost = () => {
                     ))}
                 </div>
 
-                <button disabled={btnToggle} type='submit'>Post</button>
+                <button disabled={btnToggle} type='submit'>Upload Post</button>
             </form>
         </div>
 
