@@ -5,13 +5,15 @@
   padding: 15px;
   width: 100%;
   max-width: 500px;  
-  height: 450px;    
+  height: auto;    
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
   overflow: hidden; 
   box-sizing: border-box;
   transition: transform 0.2s ease-in-out;
+  gap: 0;
 }
 
 .post-link-postcard{
@@ -35,7 +37,7 @@
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
-  margin-bottom: 6px;
+  /* margin-bottom: 6px; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -44,20 +46,20 @@
 .post-user-postcard {
   font-size: 0.9rem;
   color: #777;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .parent-post-media-postcard{
-  height: 80%;
+  height: 75%;
   text-align: center;
 }
 
 .post-media-postcard {
-  width: 100%;
   border-radius: 10px;
   object-fit: contain;
-  height: 90%;
-  margin-bottom: 10px;
+  height: 80%;
+  width: 100%;
+  /* margin-bottom: 10px; */
 }
 
 @media (max-width: 768px){
@@ -67,10 +69,13 @@
 }
 
 .post-likes-postcard {
-  height: 30%;
+  height: 25%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid rgb(227, 227, 227);
+  padding: 20px;
+  border-radius: 10px;
   /* background-color: green; */
 }
 
@@ -121,7 +126,7 @@
   justify-content: center;
   gap: 3px;
   padding: 10px;
-  background-color: #56afac;
+  background-color: #22c55e;
   border-radius: 10px;
   
 }
@@ -129,5 +134,10 @@
 @media (max-width: 768px){
   .remove-nav{
     font-size: 11px;
+    padding:10px;
+  }
+
+  .post-likes-postcard{
+    padding: 5px;
   }
 }
