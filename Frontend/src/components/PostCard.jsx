@@ -8,7 +8,7 @@ import { FaBookReader } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, setPostsData  }) => {
   const { user, backendUrl } = useContext(JanContext);
 
   const handleDeletePost = async () => {
@@ -23,6 +23,7 @@ const PostCard = ({ post }) => {
       if (response.data.success) {
         toast.success("Post Deleted Successfully!");
         alert("Post Deleted");
+        setPostsData((prevPosts) => prevPosts.filter((p) => p.PID !== post.PID));
       } else {
         toast.error("Error deleting the post");
       }

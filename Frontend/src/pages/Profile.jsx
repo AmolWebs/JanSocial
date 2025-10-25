@@ -65,7 +65,7 @@ const Profile = () => {
                 <div className="posts-grid" >
                     {posts.length !== 0 ? posts.map((post) => (
                         <div className="post-link">
-                            <PostCard key={post.PID} post={post} />
+                            <PostCard key={post.PID} post={post} setPostsData={setPostsData} />
                         </div>
                     ))
                         :

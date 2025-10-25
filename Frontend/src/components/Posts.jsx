@@ -22,7 +22,7 @@ const Posts = () => {
   return (
     <div className="posts-grid">
       {postsData.map((post) => (
-        <PostCard key={post.PID} post={post} />
+        <PostCard key={post.PID} post={post} setPostsData={setPostsData} />
       ))}
     </div>
   );

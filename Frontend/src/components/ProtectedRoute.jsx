@@ -11,9 +11,6 @@ const ProtectedRoute = ({ children }) => {
 
 
     if (!user) {
-        toast.info("Login First to use Application", {
-            position: "top-center"
-        });
         return <Navigate to="/login" />
     }
 
@@ -22,6 +19,11 @@ const ProtectedRoute = ({ children }) => {
             setUser(localStorage.getItem("UID"));
         }
         checkUser();
+        if(!user){
+            toast.info("Login First to use Application", {
+            position: "top-center"
+        });
+        }
     })
 
     return children;

@@ -93,6 +93,7 @@ const CreatePost = () => {
         // const response = axios.post(`${backendUrl}/api/post/create`, { UID: user, postTitle: postTitle, postDescription: postDescription, file: file, postType: postType })
         if (response.data.success) {
             toast.success("Post Added Successfully")
+            setBtnToggle(false)
         }
         else {
             toast.error("Please try again later")
@@ -102,7 +103,7 @@ const CreatePost = () => {
         console.log("Post Submitted Successfully !", { UID: user, postTitle: postTitle, postDescription: postDescription, file: file, postType: postType })
         setPostTitle("")
         setPostDescription("")
-        setTags([])
+        setTags(["news"])
         setFile(null)
         setPostType("image")
         setTagInput("")
@@ -151,7 +152,6 @@ const CreatePost = () => {
 
                 <label>Add Tags:</label>
                 <input
-                    required
                     type="text"
                     value={tagInput}
                     onChange={handleTagInput}
